@@ -31,7 +31,7 @@ export const AnalysisOverTime = () => {
 
   return (
     <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 w-full">
-      <div className="flex justify-between items-center mb-4">
+      <div className="flex justify-between flex-wrap items-center mb-4">
         <div className="flex gap-2">
           {tabs.map((tab) => (
             <button
