@@ -179,25 +179,24 @@ const statuses = [
 export const OrderStatus = () => {
   const total = statuses.reduce((sum, s) => sum + s.value, 0);
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl  shadow-sm border border-gray-100 dark:border-gray-700 w-full max-w-[550px] min-w-[500px]">
-      <div className="flex justify-between  items-center p-3">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 w-full max-w-full sm:max-w-[550px] min-w-0">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center p-3 gap-2">
         <h2 className="text-md font-semibold text-gray-800 dark:text-white">
           Order Status
         </h2>
-        <div className="flex gap-2">
-          <select className="border min-w-36 rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700 focus:outline-none">
+        <div className="flex gap-2 w-full sm:w-auto">
+          <select className="border min-w-0 sm:min-w-36 rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700 focus:outline-none w-full sm:w-auto">
             <option>All Categories</option>
           </select>
-          <button className="border rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700 flex items-center gap-1">
+          <button className="border rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700 flex items-center gap-1 w-full sm:w-auto justify-center">
             2023 <DateIcon />
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4  border-t-2 rounded-b-xl overflow-hidden border-gray-100">
+      <div className="grid md:grid-cols-2 grid-cols-1 gap-4 border-t-2 rounded-b-xl overflow-hidden border-gray-100">
         <div className="col-span-1 grid grid-cols-2">
           {statuses.slice(0, 6).map((s, index) => {
             const leftBorderIndex = [1, 3, 5];
-
             const borderLeft = leftBorderIndex.includes(index);
             const bottomBorder = index < statuses.length - 2;
             return (
@@ -207,14 +206,14 @@ export const OrderStatus = () => {
                   borderLeft ? "border-l-2" : ""
                 } ${
                   bottomBorder ? "border-b-2" : ""
-                } items-center bg-gray-50 dark:bg-gray-900 p-4`}
+                } items-center bg-gray-50 dark:bg-gray-900 p-2 sm:p-4`}
               >
                 <div className="mt-[-13px]">{s.icon}</div>
                 <div className="flex flex-col">
-                  <span className="text-sm text-gray-500 dark:text-gray-300 mt-1">
+                  <span className="text-xs sm:text-sm text-gray-500 dark:text-gray-300 mt-1">
                     {s.label}
                   </span>
-                  <span className="text-lg font-bold text-gray-800 dark:text-white">
+                  <span className="text-base sm:text-lg font-bold text-gray-800 dark:text-white">
                     {s.value}
                   </span>
                 </div>
@@ -223,8 +222,8 @@ export const OrderStatus = () => {
           })}
         </div>
         <div className="col-span-1 flex items-center justify-center">
-          {/* Real donut chart using recharts */}
-          <div style={{ width: 300, height: 300, position: "relative" }}>
+          {/* Responsive donut chart using recharts */}
+          <div className="w-full h-[200px] sm:h-[250px] md:h-[300px] relative">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
@@ -233,8 +232,8 @@ export const OrderStatus = () => {
                   nameKey="label"
                   cx="50%"
                   cy="50%"
-                  innerRadius={70}
-                  outerRadius={100}
+                  innerRadius={50}
+                  outerRadius={80}
                   startAngle={90}
                   endAngle={-270}
                   paddingAngle={2}
@@ -259,13 +258,13 @@ export const OrderStatus = () => {
                         fill="#fff"
                         textAnchor="middle"
                         dominantBaseline="central"
-                        fontSize={12}
+                        fontSize={10}
                       >
                         {`${(percent * 100).toFixed(0)}%`}
                       </text>
                     );
                   }}
-                  labelLine={false} // optional: removes connecting line
+                  labelLine={false}
                 >
                   {statuses.map((entry, index) => (
                     <Cell
@@ -276,7 +275,6 @@ export const OrderStatus = () => {
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
-
             <div
               style={{
                 position: "absolute",
@@ -290,7 +288,7 @@ export const OrderStatus = () => {
                 pointerEvents: "none",
               }}
             >
-              <span className="text-3xl font-bold text-gray-800 dark:text-white">
+              <span className="text-2xl sm:text-3xl font-bold text-gray-800 dark:text-white">
                 {total}
               </span>
             </div>
