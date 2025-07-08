@@ -47,7 +47,7 @@ export default function Navbar() {
       {/* Right: Actions (hidden on mobile) */}
       <div className="md:flex items-center gap-3 hidden">
         {/* Center: Search Bar (hidden on mobile) */}
-        <div className="flex-1 flex justify-center md:block hidden">
+        <div className="flex-1 flex mx-5 lg:w-[500px] justify-center md:block hidden">
           <div className="w-full max-w-md">
             <div className="relative">
               <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-400 dark:text-gray-300">

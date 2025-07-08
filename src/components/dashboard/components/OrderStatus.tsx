@@ -1,5 +1,6 @@
 import React from "react";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
+import { DateIcon } from "../../../assets/DateIcon";
 
 const COLORS = [
   "#f87171", // red
@@ -178,9 +179,9 @@ const statuses = [
 export const OrderStatus = () => {
   const total = statuses.reduce((sum, s) => sum + s.value, 0);
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 w-full max-w-[550px]">
-      <div className="flex justify-between items-center mb-4">
-        <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl  shadow-sm border border-gray-100 dark:border-gray-700 w-full max-w-[550px] min-w-[500px]">
+      <div className="flex justify-between  items-center p-3">
+        <h2 className="text-md font-semibold text-gray-800 dark:text-white">
           Order Status
         </h2>
         <div className="flex gap-2">
@@ -188,35 +189,38 @@ export const OrderStatus = () => {
             <option>All Categories</option>
           </select>
           <button className="border rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700 flex items-center gap-1">
-            2023{" "}
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
-              <path
-                d="M7 10l5 5 5-5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            2023 <DateIcon />
           </button>
         </div>
       </div>
-      <div className="grid grid-cols-2 gap-4">
-        <div className="col-span-1 grid grid-cols-2 gap-4">
-          {statuses.slice(0, 6).map((s) => (
-            <div
-              key={s.label}
-              className="flex flex-col items-center bg-gray-50 dark:bg-gray-900 rounded-lg p-3"
-            >
-              {s.icon}
-              <span className="text-sm text-gray-500 dark:text-gray-300 mt-1">
-                {s.label}
-              </span>
-              <span className="text-lg font-bold text-gray-800 dark:text-white">
-                {s.value}
-              </span>
-            </div>
-          ))}
+      <div className="grid grid-cols-2 gap-4  border-t-2 rounded-b-xl overflow-hidden border-gray-100">
+        <div className="col-span-1 grid grid-cols-2">
+          {statuses.slice(0, 6).map((s, index) => {
+            const leftBorderIndex = [1, 3, 5];
+
+            const borderLeft = leftBorderIndex.includes(index);
+            const bottomBorder = index < statuses.length - 2;
+            return (
+              <div
+                key={s.label}
+                className={`flex gap-2 border-gray-100 ${
+                  borderLeft ? "border-l-2" : ""
+                } ${
+                  bottomBorder ? "border-b-2" : ""
+                } items-center bg-gray-50 dark:bg-gray-900 p-4`}
+              >
+                <div className="mt-[-13px]">{s.icon}</div>
+                <div className="flex flex-col">
+                  <span className="text-sm text-gray-500 dark:text-gray-300 mt-1">
+                    {s.label}
+                  </span>
+                  <span className="text-lg font-bold text-gray-800 dark:text-white">
+                    {s.value}
+                  </span>
+                </div>
+              </div>
+            );
+          })}
         </div>
         <div className="col-span-1 flex items-center justify-center">
           {/* Real donut chart using recharts */}
@@ -229,11 +233,39 @@ export const OrderStatus = () => {
                   nameKey="label"
                   cx="50%"
                   cy="50%"
-                  innerRadius={48}
-                  outerRadius={64}
+                  innerRadius={70}
+                  outerRadius={100}
                   startAngle={90}
                   endAngle={-270}
                   paddingAngle={2}
+                  label={({
+                    cx,
+                    cy,
+                    midAngle,
+                    innerRadius,
+                    outerRadius,
+                    percent,
+                  }) => {
+                    const RADIAN = Math.PI / 180;
+                    const radius =
+                      innerRadius + (outerRadius - innerRadius) / 2;
+                    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+                    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+                    return (
+                      <text
+                        x={x}
+                        y={y}
+                        fill="#fff"
+                        textAnchor="middle"
+                        dominantBaseline="central"
+                        fontSize={12}
+                      >
+                        {`${(percent * 100).toFixed(0)}%`}
+                      </text>
+                    );
+                  }}
+                  labelLine={false} // optional: removes connecting line
                 >
                   {statuses.map((entry, index) => (
                     <Cell
@@ -244,6 +276,7 @@ export const OrderStatus = () => {
                 </Pie>
               </PieChart>
             </ResponsiveContainer>
+
             <div
               style={{
                 position: "absolute",

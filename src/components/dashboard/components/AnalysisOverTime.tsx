@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { DateIcon } from "../../../assets/DateIcon";
 
 const months = [
   { label: "Jan", value: 589.12 },
@@ -30,9 +31,9 @@ export const AnalysisOverTime = () => {
   const yAxisLabelWidth = 48; // extra space for y-axis labels
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 w-full">
-      <div className="flex justify-between flex-wrap items-center mb-4">
-        <div className="flex gap-2">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl  shadow-sm border border-gray-100 dark:border-gray-700 w-full">
+      <div className="flex justify-between flex-wrap items-center p-4">
+        <div className="flex gap-2 border rounded-lg">
           {tabs.map((tab) => (
             <button
               key={tab}
@@ -53,20 +54,11 @@ export const AnalysisOverTime = () => {
             <option>All Categories</option>
           </select>
           <button className="border rounded-lg px-2 py-1 text-sm text-gray-700 dark:text-gray-200 dark:bg-gray-900 dark:border-gray-700 flex items-center gap-1">
-            Jun 2023{" "}
-            <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
-              <path
-                d="M7 10l5 5 5-5"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
+            Jun 2023 <DateIcon />
           </button>
         </div>
       </div>
-      <div className="flex flex-col md:flex-row justify-between items-start w-full">
+      <div className="flex flex-col border-t p-4 md:flex-row justify-between items-start w-full">
         <div className="w-full ">
           <div className="text-lg font-semibold text-gray-800 dark:text-white mb-2">
             Revenue

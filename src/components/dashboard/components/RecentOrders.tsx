@@ -1,4 +1,5 @@
 import React from "react";
+import { ArrowRightIcon } from "../../../assets/ArrowRightIcon";
 
 const orders = [
   {
@@ -100,11 +101,11 @@ const orders = [
 
 export const RecentOrders = () => {
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 w-full">
-      <h2 className="text-lg font-semibold text-gray-800 dark:text-white mb-4">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl shadow-sm border border-gray-100 dark:border-gray-700 w-full">
+      <h2 className="text-lg font-semibold text-gray-800 dark:text-white p-4">
         Recent Orders
       </h2>
-      <div className="overflow-x-auto">
+      <div className="overflow-x-auto border-t">
         <table className="min-w-full text-sm">
           <thead>
             <tr className="text-gray-500 font-semibold bg-white dark:bg-gray-900">
@@ -166,21 +167,13 @@ export const RecentOrders = () => {
           </tbody>
         </table>
       </div>
-      <div className="flex justify-center mt-3">
+      <div className="flex justify-center my-3">
         <a
           href="#"
           className="text-blue-700 dark:text-blue-400 text-sm font-semibold flex items-center gap-1 hover:underline"
         >
           View 256 more orders
-          <svg width="16" height="16" fill="none" viewBox="0 0 24 24">
-            <path
-              d="M9 5l7 7-7 7"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
+          <ArrowRightIcon/>
         </a>
       </div>
     </div>

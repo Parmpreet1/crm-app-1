@@ -9,7 +9,7 @@ export const Dashboard = () => {
   return (
     <div className="flex flex-col gap-5">
       <Crousal />
-      <div className="flex flex-wrap gap-5 justify-between">
+      <div className="flex md:flex-wrap gap-5 justify-between">
         <OrderStatus />
         <RecentActivities />
       </div>

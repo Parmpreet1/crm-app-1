@@ -76,8 +76,8 @@ const activities = [
 
 export const RecentActivities = () => {
   return (
-    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 shadow-sm border border-gray-100 dark:border-gray-700 w-full max-w-[530px]">
-      <div className="flex justify-between items-center mb-4">
+    <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl  shadow-sm border border-gray-100 dark:border-gray-700 w-full max-h-[355px] overflow-hidden max-w-[500px]">
+      <div className="flex justify-between items-center p-4">
         <h2 className="text-lg font-semibold text-gray-800 dark:text-white">
           Recent Activities
         </h2>
@@ -90,7 +90,7 @@ export const RecentActivities = () => {
           </button>
         </div>
       </div>
-      <div className="space-y-4">
+      <div className="space-y-4 border-t-2 border-gray-100 p-4">
         {activities.map((group) => (
           <div key={group.day}>
             <div className="text-xs font-semibold text-gray-400 dark:text-gray-300 mb-2 uppercase">

@@ -1,4 +1,6 @@
 import React, { useRef } from "react";
+import { UpTrandIcon } from "../../../assets/UpTrandIcon";
+import { DownTrandIcon } from "../../../assets/DownTrandIcon";
 
 const stats = [
   {
@@ -55,9 +57,9 @@ const stats = [
     ),
     title: "Total Orders",
     value: "123",
-    change: "+28%",
+    change: "28%",
     changeColor: "text-green-500",
-    changeIcon: "▲",
+    changeIcon: <UpTrandIcon />,
     isCurrency: false,
     negative: false,
   },
@@ -122,9 +124,9 @@ const stats = [
     ),
     title: "Total Taken",
     value: "123",
-    change: "-15%",
+    change: "15%",
     changeColor: "text-red-500",
-    changeIcon: "▼",
+    changeIcon: <DownTrandIcon/>,
     isCurrency: false,
     negative: true,
   },
@@ -197,9 +199,9 @@ const stats = [
     ),
     title: "Total Revenue",
     value: "123",
-    change: "+28%",
+    change: "28%",
     changeColor: "text-green-500",
-    changeIcon: "▲",
+    changeIcon: <UpTrandIcon/>,
     isCurrency: false,
     negative: false,
   },
@@ -262,9 +264,9 @@ const stats = [
     ),
     title: "Pending Orders",
     value: "$1234.99",
-    change: "-28%",
+    change: "28%",
     changeColor: "text-red-500",
-    changeIcon: "▼",
+    changeIcon: <DownTrandIcon/>,
     isCurrency: true,
     negative: true,
   },
@@ -329,9 +331,9 @@ const stats = [
     ),
     title: "Pending Returns",
     value: "$1234.99",
-    change: "-28%",
+    change: "28%",
     changeColor: "text-red-500",
-    changeIcon: "▼",
+    changeIcon: <DownTrandIcon/>,
     isCurrency: true,
     negative: true,
   },
@@ -351,10 +353,10 @@ export const Crousal = () => {
   };
 
   return (
-    <div className="flex items-center w-full py-2">
+    <div className="flex items-center w-full relative py-2">
       {/* Left Arrow */}
       <button
-        className="mx-1 p-1 rounded-full border border-gray-200 bg-white shadow-sm text-gray-400 hover:text-purple-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
+        className="mx-1 p-1 absolute left-[-13px] rounded-full border border-gray-200 bg-white shadow-sm text-gray-400 hover:text-purple-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
         onClick={() => scroll("left")}
         aria-label="Scroll left"
       >
@@ -370,29 +372,33 @@ export const Crousal = () => {
       </button>
       {/* Cards */}
       <div
-        className="flex space-x-4 overflow-x-hidden scrollbar-hide"
+        className="flex space-x-4 h-[136px] overflow-x-hidden scrollbar-hide"
         ref={scrollRef}
         style={{ scrollBehavior: "smooth" }}
       >
         {stats.map((stat, idx) => (
           <div
             key={stat.title}
-            className="min-w-[220px] bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm px-5 py-3 flex flex-col justify-between"
+            className="min-w-[220px] md:min-w-[277px] bg-gray-50 dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 shadow-sm   flex flex-col justify-between"
           >
-            <div className="flex items-center mb-2">
-              {stat.icon}
-              <span className="ml-3 text-gray-500 dark:text-gray-200 text-sm font-medium">
-                {stat.title}
-              </span>
+            <div className="py-3 px-5">
+              <div className="flex items-center mb-2">
+                {stat.icon}
+                <div className="ml-3">
+                  <span className="text-gray-500 dark:text-gray-200 text-sm font-medium">
+                    {stat.title}
+                  </span>
+                  <div className="text-2xl font-semibold mb-1 dark:text-white">
+                    {stat.value}
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className="text-2xl font-semibold mb-1 dark:text-white">
-              {stat.value}
-            </div>
-            <div className="flex items-center text-xs bg-white dark:bg-gray-800">
+            <div className="flex justify-between h-[42px] p-3 rounded-b-xl items-center text-xs bg-white dark:bg-gray-600">
               <span
                 className={`mr-2 font-semibold flex items-center ${stat.changeColor}`}
               >
-                {stat.changeIcon} {stat.change}
+                {stat.changeIcon}{stat.change}
               </span>
               <span className="text-gray-400 dark:text-gray-300">
                 From The Last Month
@@ -403,7 +409,7 @@ export const Crousal = () => {
       </div>
       {/* Right Arrow */}
       <button
-        className="mx-1 p-1 rounded-full border border-gray-200 bg-white shadow-sm text-gray-400 hover:text-purple-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
+        className="mx-1 p-1 absolute right-[-13px] rounded-full border border-gray-200 bg-white shadow-sm text-gray-400 hover:text-purple-500 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-300"
         onClick={() => scroll("right")}
         aria-label="Scroll right"
       >
